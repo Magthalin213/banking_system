@@ -41,8 +41,8 @@ public class BankController {
 			
 			switch(input)
 			{
-		// -------------------------------------------------------------------------
-			// createAccount()
+			// -------------------------------------------------------------------------
+				// createAccount()
 			case 1:
 				System.out.println("**********Creating Account**********");
 				System.out.println("Enter you first name: ");
@@ -96,6 +96,7 @@ public class BankController {
 				bs.calculateInterest(bal,rate);
 				break;
 			// -------------------------------------------------------------------------
+				//4. getAccountBalance()
 			case 4:
 				System.out.println("*********Account Balance*********");
 				System.out.println("Enter your Account Number:");
@@ -109,6 +110,7 @@ public class BankController {
 				}
 				break;
 			// -------------------------------------------------------------------------
+				//5. depositAmount()
 			case 5:
 				System.out.println("*********Deposit Amount*********");
 				System.out.println("Enter your Account Number:");
@@ -123,6 +125,7 @@ public class BankController {
 				}
 				break;
 			// -------------------------------------------------------------------------
+				//6. withdraw()
 			case 6:
 				System.out.println("*********WithDraw Amount*********");
 				System.out.println("Enter your Account Number:");
@@ -139,6 +142,7 @@ public class BankController {
 				}
 				break;
 			// -------------------------------------------------------------------------
+				//7. transfer()
 			case 7:
 				System.out.println("*********Transfer Amount*********");
 				System.out.println("Enter your Account Number:");
@@ -151,6 +155,7 @@ public class BankController {
 				cbs.transfer(senderAcc,receiverAcc,transfered);
 				break;
 			// -------------------------------------------------------------------------
+				//8. getAccountDetails()
 			case 8:
 				System.out.println("*********Account Details*********");
 				System.out.println("Enter your Account Number:");
