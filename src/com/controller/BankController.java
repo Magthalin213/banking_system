@@ -56,10 +56,25 @@ public class BankController {
 				String phone=sc.nextLine();
 				System.out.println("Enter your address: ");
 				String address=sc.nextLine();
-				
-				Customer cus= new Customer(fname,lname,email,phone,address);
+				System.out.println("Enter your Username: ");
+				String username=sc.nextLine();
+				System.out.println("Enter your Password: ");
+				String password=sc.nextLine();
+				System.out.println("Enter the Role to be Assigned:\n1.User\n2.Admin");
+				int ch=sc.nextInt();
+				String role=null;
+				if(ch==1)
+					role="User";
+				else if (ch==2)
+					role="Admin";
+				else
+				{
+					System.out.println("Invalid inplut...");
+					break;
+				}
+				Customer cus= new Customer(fname,lname,email,phone,address,username,password,role);
 				int usi = bs.createCustomerAccount(cus);
-				
+				System.out.println(usi);
 				System.out.println("******Enter Account Details******\nEnter Account Number: ");
 				sc.nextLine();
 				String accNum=sc.nextLine();
@@ -105,7 +120,6 @@ public class BankController {
 				try {
 					cbs.getAccountBalance(accountNumber);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
@@ -172,5 +186,6 @@ public class BankController {
 				break;
 			}
 		}
+		sc.close();
 	}
 }

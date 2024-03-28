@@ -112,5 +112,6 @@ public class CustomerController {
 				break;
 			}
 		}
+		sc.close();
 	}
 }

@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 import com.model.Bank;
 import com.model.Customer;
+import com.mysql.jdbc.Statement;
+import com.service.CustomerService;
 import com.util.DBUtil;
 
 public class BankDaoImpl implements BankDao {
@@ -17,27 +19,39 @@ public class BankDaoImpl implements BankDao {
 	@Override
 	public int createCustomerAccount(Customer cus) throws SQLException {
 		Connection conn=DBUtil.getDBConn();
-		String sql = "INSERT INTO customer(first_name,last_name,email,phone_number,address) VALUES(?,?,?,?,?)";
-		PreparedStatement pstmt=conn.prepareStatement(sql);
+	    ResultSet rs = null;
+	    int generatedCustomerId = -1; 
+		String sql = "INSERT INTO customer(first_name,last_name,email,phone_number,address,username,password,roles) VALUES(?,?,?,?,?,?,?,?)";
+		PreparedStatement pstmt=conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		String fname= cus.getFirstName();
 		String lname=cus.getLastName();
 		String email=cus.getEmail();
 		String phone=cus.getPhoneNumber();
 		String address=cus.getAddress();
+		String username=cus.getUsername();
+		String password=cus.getPassword();
+		String role=cus.getRole();
 		pstmt.setString(1, fname);
 		pstmt.setString(2, lname);
 		pstmt.setString(3, email);
 		pstmt.setString(4, phone);
 		pstmt.setString(5, address);
-
-		int changes=pstmt.executeUpdate();
+		pstmt.setString(6, username);
+		pstmt.setString(7, password);
+		pstmt.setString(8, role);
 		
+		int changes=pstmt.executeUpdate();
 		if(changes==0)
 			System.out.println("Error....No updates have been done");
 		else
+		{
 			System.out.println("New Customer has been Inserted succesfully...\n Add the Account Details");
+			rs = pstmt.getGeneratedKeys();
+            if (rs.next()) 
+                generatedCustomerId = rs.getInt(1);
+		}
 		DBUtil.dbClose();
-		return cus.getId();
+		return generatedCustomerId;
 	}
 
 	@Override
